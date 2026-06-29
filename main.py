@@ -9,7 +9,7 @@ def view_applications():
         print("\nNo applications found!")
         return
     print("\n===== Your Applications =====")
-    for index, application in enumerate(data,start=1):
+    for index, application in enumerate(data, start=1):
         print(f"\nApplication #{index}")
         print(f"Company : {application['company']}")
         print(f"Position : {application['position']}")
@@ -17,7 +17,35 @@ def view_applications():
         print(f"Date : {application['date']}")
         print(f"Status: {application['status']}")
 
+def update_status():
+    data = load_data()
+    if not data:
+        print("\nNo applications found!")
+        return
+    for index, application in enumerate(data, start=1):
+        print(f"{index}. {application['company']} - {application['position']} - {application['status']}")
+    choice = int(input("\nEnter application number: "))
+    application = data[choice - 1]
+    statuses = {
+        "1" : "Applied",
+        "2" : "Interview",
+        "3" : "Rejected",
+        "4" : "Accepted"
+    }
+    print("\nChoose new status:")
+    print("1. Applied")
+    print("2. Interview")
+    print("3. Rejected")
+    print("4. Accepted")
 
+    status_choice = input("Choice: ")
+
+    if status_choice in statuses:
+        application["status"] = statuses[status_choice]
+        save_data(data)
+        print("\nStatus updated successfully!")
+    else:
+        print("\nInvalid status.")
 
 def menu():
     print("\n==============================")
@@ -61,7 +89,8 @@ while True:
             position,
             location,
             today,
-    'Applied')
+    'Applied'
+        )
 
         data = load_data()
         data.append(application.to_dict())
@@ -73,6 +102,9 @@ while True:
 
     elif choice == "3":
         search_company()
+
+    elif choice == "4":
+        update_status()
 
     elif choice == "7":
         print("Exiting...")
