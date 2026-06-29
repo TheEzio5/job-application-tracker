@@ -1,15 +1,15 @@
 class Application:
-    def __init__(self,company,position, country, date, status):
+    def __init__(self,company,position, location, date, status):
         self.company = company
         self.position = position
-        self.country = country
+        self.location = location
         self.date = date
         self.status = status
     def to_dict(self):
         return {
             "company": self.company,
             "position": self.position,
-            "country": self.country,
+            "location": self.location,
             "date": self.date,
             "status": self.status
         }

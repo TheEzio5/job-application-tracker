@@ -3,6 +3,21 @@ from application import Application
 from storage import load_data, save_data
 from datetime import datetime
 
+def view_applications():
+    data = load_data()
+    if not data:
+        print("\nNo applications found!")
+        return
+    print("\n===== Your Applications =====")
+    for index, application in enumerate(data,start=1):
+        print(f"\nApplication #{index}")
+        print(f"Company : {application['company']}")
+        print(f"Position : {application['position']}")
+        print(f"Location : {application['location']}")
+        print(f"Date : {application['date']}")
+        print(f"Status: {application['status']}")
+
+
 
 def menu():
     print("\n==============================")
@@ -36,6 +51,9 @@ while True:
         data.append(application.to_dict())
         save_data(data)
         print("\nApplication saved!")
+
+    elif choice == "2":
+        view_applications()
 
     elif choice == "7":
         print("Exiting...")

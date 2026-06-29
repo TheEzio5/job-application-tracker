@@ -2,7 +2,14 @@
     {
         "company": "Tesla",
         "position": "Mechanic",
-        "country": "Roma",
+        "location": "Roma",
+        "date": "29-06-2026",
+        "status": "Applied"
+    },
+    {
+        "company": "Google",
+        "position": "Web page maker",
+        "location": "Washington D.C.",
         "date": "29-06-2026",
         "status": "Applied"
     }
