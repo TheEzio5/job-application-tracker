@@ -31,6 +31,22 @@ def menu():
     print("6. Statistics")
     print("7. Exit")
 
+def search_company():
+    data = load_data()
+    company_name = input("\nEnter company name: ").strip()
+    found = False
+    for application in data:
+        if application['company'].lower() == company_name.lower():
+            print("\nApplication found!")
+            print(f"Company : {application['company']}")
+            print(f"Position : {application['position']}")
+            print(f"Location : {application['location']}")
+            print(f"Date : {application['date']}")
+            print(f"Status: {application['status']}")
+            found = True
+    if not found:
+        print("\nNo applications found!")
+
 while True:
     menu()
     choice = input("\nChoose an option: ")
@@ -54,6 +70,9 @@ while True:
 
     elif choice == "2":
         view_applications()
+
+    elif choice == "3":
+        search_company()
 
     elif choice == "7":
         print("Exiting...")
