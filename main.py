@@ -25,6 +25,7 @@ def update_status():
     for index, application in enumerate(data, start=1):
         print(f"{index}. {application['company']} - {application['position']} - {application['status']}")
     choice = int(input("\nEnter application number: "))
+    if 1 <= choice <= len(data):
     application = data[choice - 1]
     statuses = {
         "1" : "Applied",
@@ -73,6 +74,37 @@ def delete_application():
             print("\nDeletion cancelled.")
     else:
         print("\nInvalid application number.")
+
+def statistics():
+    data = load_data()
+
+    applied = 0
+    interview = 0
+    accepted = 0
+    rejected = 0
+
+    if not data:
+        print("\nNo applications found!")
+        return
+
+    total = len(data)
+
+    for application in data:
+        if application["status"] == "Applied":
+            applied += 1
+        elif application["status"] == "Interview":
+            interview += 1
+        elif application["status"] == "Rejected":
+            rejected += 1
+        elif application["status"] == "Accepted":
+            accepted += 1
+    print(f" ======== Statistics ======= \n")
+    print(f"Total applications: {total}")
+    print(f"Applied: {applied}")
+    print(f"Interview: {interview}")
+    print(f"Accepted: {accepted}")
+    print(f"Rejected: {rejected}")
+
 def menu():
     print("\n==============================")
     print(" Job Application Tracker")
@@ -134,6 +166,8 @@ while True:
 
     elif choice == "5":
         delete_application()
+    elif choice == "6":
+        statistics()
 
     elif choice == "7":
         print("Exiting...")
