@@ -19,34 +19,49 @@ def view_applications():
 
 def update_status():
     data = load_data()
+
     if not data:
         print("\nNo applications found!")
         return
+
+    # Show all applications
     for index, application in enumerate(data, start=1):
         print(f"{index}. {application['company']} - {application['position']} - {application['status']}")
-    choice = int(input("\nEnter application number: "))
-    if 1 <= choice <= len(data):
-    application = data[choice - 1]
-    statuses = {
-        "1" : "Applied",
-        "2" : "Interview",
-        "3" : "Rejected",
-        "4" : "Accepted"
-    }
-    print("\nChoose new status:")
-    print("1. Applied")
-    print("2. Interview")
-    print("3. Rejected")
-    print("4. Accepted")
 
-    status_choice = input("Choice: ")
+    try:
+        choice = int(input("\nEnter application number: "))
 
-    if status_choice in statuses:
-        application["status"] = statuses[status_choice]
-        save_data(data)
-        print("\nStatus updated successfully!")
-    else:
-        print("\nInvalid status.")
+        if 1 <= choice <= len(data):
+            application = data[choice - 1]
+
+            statuses = {
+                "1": "Applied",
+                "2": "Interview",
+                "3": "Rejected",
+                "4": "Accepted"
+            }
+
+            print("\nChoose new status:")
+            print("1. Applied")
+            print("2. Interview")
+            print("3. Rejected")
+            print("4. Accepted")
+
+            status_choice = input("Choice: ")
+
+            if status_choice in statuses:
+                application["status"] = statuses[status_choice]
+                save_data(data)
+                print("\nStatus updated successfully!")
+            else:
+                print("\nInvalid status.")
+
+        else:
+            print("\nInvalid application number.")
+
+    except ValueError:
+        print("\nInvalid input. You can only enter numbers.")
+        return
 
 def delete_application():
     data = load_data()
