@@ -47,6 +47,32 @@ def update_status():
     else:
         print("\nInvalid status.")
 
+def delete_application():
+    data = load_data()
+
+    if not data:
+        print("\nNo applications found!")
+        return
+
+    for index, application in enumerate(data, start=1):
+        print(f"{index}. {application['company']} - {application['position']} - {application['status']}")
+
+    choice = int(input("Enter application number: "))
+    if 1 <= choice <= len(data):
+        application = data[choice - 1]
+
+        confirm = input(
+        f"Are you sure you want to delete '{application['company']}'? (y/n): "
+    ).lower()
+
+        if confirm == "y":
+            del data[choice - 1]
+            save_data(data)
+            print("\nApplication deleted successfully!")
+        else:
+            print("\nDeletion cancelled.")
+    else:
+        print("\nInvalid application number.")
 def menu():
     print("\n==============================")
     print(" Job Application Tracker")
@@ -105,6 +131,9 @@ while True:
 
     elif choice == "4":
         update_status()
+
+    elif choice == "5":
+        delete_application()
 
     elif choice == "7":
         print("Exiting...")
