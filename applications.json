@@ -19,12 +19,5 @@
         "location": "Tokyo",
         "date": "01-07-2026",
         "status": "Applied"
-    },
-    {
-        "company": "Tata C.o>",
-        "position": "Technician",
-        "location": "Delhi",
-        "date": "01-07-2026",
-        "status": "Interview"
     }
 ]

@@ -72,23 +72,26 @@ def delete_application():
 
     for index, application in enumerate(data, start=1):
         print(f"{index}. {application['company']} - {application['position']} - {application['status']}")
+    try:
+        choice = int(input("Enter application number: "))
+        if 1 <= choice <= len(data):
+            application = data[choice - 1]
 
-    choice = int(input("Enter application number: "))
-    if 1 <= choice <= len(data):
-        application = data[choice - 1]
+            confirm = input(
+            f"Are you sure you want to delete '{application['company']}'? (y/n): "
+        ).lower()
 
-        confirm = input(
-        f"Are you sure you want to delete '{application['company']}'? (y/n): "
-    ).lower()
-
-        if confirm == "y":
-            del data[choice - 1]
-            save_data(data)
-            print("\nApplication deleted successfully!")
+            if confirm == "y":
+                del data[choice - 1]
+                save_data(data)
+                print("\nApplication deleted successfully!")
+            else:
+                print("\nDeletion cancelled.")
         else:
-            print("\nDeletion cancelled.")
-    else:
-        print("\nInvalid application number.")
+            print("\nInvalid application number.")
+    except ValueError:
+            print("\nInvalid input. You can only enter numbers.")
+            return
 
 def statistics():
     data = load_data()
